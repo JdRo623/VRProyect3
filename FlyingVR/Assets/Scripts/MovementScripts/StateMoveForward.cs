@@ -4,16 +4,16 @@ using System.Collections;
 public class StateMoveForward : MovementState {
     public Vector3 movementVector;
     public float speedFoward;
-
+    private float speed;
     private Rigidbody rg;
     // Use this for initialization
     void Start () {
         rg = GetComponent<Rigidbody>();
 	}
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         Camera.main.transform.position = this.transform.position;
         movementVector.z = speedFoward * Time.deltaTime;
-        this.transform.Translate(movementVector);
+        rg.MovePosition(this.transform.position+movementVector);
     }
 }

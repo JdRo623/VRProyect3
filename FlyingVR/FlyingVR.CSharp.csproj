@@ -117,12 +117,6 @@
     <Compile Include="Assets\Scripts\CoinHandler.cs" />
     <Compile Include="Assets\Scripts\MovementScripts\MovementState.cs" />
     <Compile Include="Assets\Scripts\MovementScripts\MovementStateHandler.cs" />
-    <Compile Include="Assets\Scripts\MovementScripts\RotationHandler.cs" />
-    <Compile Include="Assets\Scripts\MovementScripts\StateMoveDown.cs" />
-    <Compile Include="Assets\Scripts\MovementScripts\StateMoveForward.cs" />
-    <Compile Include="Assets\Scripts\MovementScripts\StateMoveLeft.cs" />
-    <Compile Include="Assets\Scripts\MovementScripts\StateMoveRigth.cs" />
-    <Compile Include="Assets\Scripts\MovementScripts\StateMoveUp.cs" />
     <Compile Include="Assets\Scripts\ScoreHandler.cs" />
     <Compile Include="Assets\Utilities\FarlandSkies\Demo\Scripts\Player\FPSWalkerEnhanced.cs" />
     <Compile Include="Assets\Utilities\FarlandSkies\Demo\Scripts\Player\SmoothMouseLook.cs" />

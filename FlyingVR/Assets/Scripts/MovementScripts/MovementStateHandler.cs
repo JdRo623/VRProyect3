@@ -3,63 +3,42 @@ using System.Collections;
 
 public class MovementStateHandler : MonoBehaviour
 {
-    public static GameObject mob;
-    public GameObject player;
-    private StateMoveDown moveDown;
-    private StateMoveUp moveUp;
-    private StateMoveRigth moveRigth;
-    private StateMoveLeft moveLeft;
-    private RotationHandler playerMovement;
-    private StateMoveForward moveFoward;
-    public MovementState currentState;
+    public Vector3 movementVector;
+    public float speedFoward;
+    private float calculatedSpeed;
+    public Vector3 foward;
+    public Vector3 side;
+    public Vector3 down;
+    private Rigidbody rg;
     // Use this for initialization
-    void Awake() {
-        mob = player;
-        moveFoward = GetComponent<StateMoveForward>();
-        moveDown = GetComponent<StateMoveDown>();
-        moveUp = GetComponent<StateMoveUp>();
-        moveLeft = GetComponent<StateMoveLeft>();
-        moveRigth = GetComponent<StateMoveRigth>();
-        playerMovement = GetComponent<RotationHandler>();
-        
-        initConfig();
-        
-    }
     void Start()
     {
- 
+        rg = GetComponent<Rigidbody>();
+        down = this.transform.up * -0.2f;
+        Camera.main.transform.rotation = Camera.main.GetComponentInParent<Transform>().rotation;
     }
-    public void initConfig()
+    // Update is called once per frame
+    void FixedUpdate()
     {
-        moveFoward.enabled = true;
-        moveDown.enabled = false;
-        moveUp.enabled = false;
-        moveLeft.enabled = false;
-        moveRigth.enabled = false;
-        playerMovement.enabled = false;
-        currentState = playerMovement;
-        currentState.enabled = true;
-
-    }
-    void setNewState(MovementState newState) {
-        currentState.enabled = false;
-        currentState = newState;
-        currentState.enabled = true;
+        Camera.main.transform.position = this.transform.position;
+        calculatedSpeed = speedFoward * Time.deltaTime;
+        foward = this.transform.forward * calculatedSpeed;
+        side = this.transform.right * (Camera.main.transform.localRotation.z) * calculatedSpeed * -5;
+        rg.MovePosition(this.transform.position + (foward + side + down) * calculatedSpeed);
     }
     void OnTriggerEnter(Collider other) {
         if (other.tag == "RigthBoundary") {
-            setNewState(moveLeft);
+
         }
         else if (other.tag == "LeftBoundary") {
-            setNewState(moveRigth);
+
         }
-        else if(other.tag == "UpBoundary")
-        {
-            setNewState(moveDown);
+        else if(other.tag == "UpBoundary") {
         }
         else if(other.tag == "DownBoundary")
         {
-            setNewState(moveUp);
+            Debug.Log("DFA FH");
+            rg.AddForce(this.transform.up * 100);
         }
     }
 

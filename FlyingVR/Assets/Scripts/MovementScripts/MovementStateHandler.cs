@@ -12,7 +12,7 @@ public class MovementStateHandler : MonoBehaviour
     private Rigidbody player;
     public float fallingSpeed;
     private float calculatedSpeedFalling;
-    public float smokeImpulse;
+    private float smokeImpulse;
     private float smokeSpeed;
     public float sideSpeed;
     private float calculatedSideSpeed;
@@ -22,10 +22,11 @@ public class MovementStateHandler : MonoBehaviour
     delegate void MovementState();
     MovementState YaxisMovementState;
     MovementState XaxisMovementState;
-
+    private float timeCounter;
     // Use this for initialization
     void Start()
     {
+        timeCounter = 0;
         player = GetComponent<Rigidbody>();
         YaxisMovementState += FreeFallMovement;
         XaxisMovementState += FreeStyleMovement;
@@ -60,7 +61,7 @@ public class MovementStateHandler : MonoBehaviour
         else if (other.tag == "UpBoundary") {
             SmokeImpulse();
         } else if (other.tag == "Smoke") {
-            
+            smokeImpulse = other.GetComponent<SmokeAtributes>().smokeImpulse;
             smokeSpeed = (smokeImpulse+fallingSpeed)*Time.deltaTime;
             YaxisMovementState -= FreeFallMovement;
             YaxisMovementState += SmokeImpulse;
@@ -71,12 +72,14 @@ public class MovementStateHandler : MonoBehaviour
         }
     }
     void SmokeImpulse() {
-        Debug.Log("Smoke" + smokeSpeed);
+        timeCounter += Time.deltaTime;
         smokeSpeed = Mathf.Lerp(smokeSpeed, calculatedSpeedFalling, Time.deltaTime);
-        Debug.Log("Smoke"+smokeSpeed);
         down = this.transform.up * smokeSpeed;
-        if (smokeSpeed <= (calculatedSpeedFalling - 0.1f)) {
-            Debug.Log("Entro");
+        if (smokeSpeed <= (calculatedSpeedFalling - 0.1f) || (timeCounter>1.7)) {
+            smokeSpeed = 0;
+            calculatedSpeedFalling = 0;
+            timeCounter = 0;
+            Debug.Log("Entro");      
             YaxisMovementState -= SmokeImpulse;
             YaxisMovementState += FreeFallMovement;
         }

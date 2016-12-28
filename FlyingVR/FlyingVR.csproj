@@ -170,6 +170,7 @@
     <Compile Include="Assets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Scripts\VignetteAndChromaticAberration.cs" />
     <Compile Include="Assets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Scripts\Vortex.cs" />
     <Compile Include="Assets\Scripts\CoinHandler.cs" />
+    <Compile Include="Assets\Scripts\GameHandler.cs" />
     <Compile Include="Assets\Scripts\MovementScripts\MovementState.cs" />
     <Compile Include="Assets\Scripts\MovementScripts\MovementStateHandler.cs" />
     <Compile Include="Assets\Scripts\MovementScripts\SmokeAtributes.cs" />

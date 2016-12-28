@@ -23,10 +23,14 @@ public class MovementStateHandler : MonoBehaviour
     MovementState YaxisMovementState;
     MovementState XaxisMovementState;
     private float timeCounter;
+    private float initialTime;
+    private GameHandler gh;
     // Use this for initialization
     void Start()
     {
+        gh = FindObjectOfType<GameHandler>();
         timeCounter = 0;
+        initialTime = 0;
         player = GetComponent<Rigidbody>();
         YaxisMovementState += FreeFallMovement;
         XaxisMovementState += FreeStyleMovement;
@@ -36,6 +40,11 @@ public class MovementStateHandler : MonoBehaviour
     void FixedUpdate()
     {
         Camera.main.transform.position = this.transform.position;
+        if (gh.isEnableToMove) {
+            MovementCalculations();
+        }
+    }
+    void MovementCalculations() {
         calculatedSpeedFoward = speedFoward * Time.deltaTime;
         calculatedSpeedFalling = -fallingSpeed * Time.deltaTime;
         calculatedSideSpeed = sideSpeed * Time.deltaTime;
@@ -45,6 +54,7 @@ public class MovementStateHandler : MonoBehaviour
 
         player.MovePosition(this.transform.position + (foward + side + down) * calculatedSpeedFoward);
     }
+
     void OnTriggerEnter(Collider other) {
         if (other.tag == "RigthBoundary") {
             sideBoundaryDirection = -1;

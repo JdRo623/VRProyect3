@@ -39,6 +39,7 @@ public class MovementStateHandler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log (this.transform.localPosition);
         Camera.main.transform.position = this.transform.position;
         if (gh.isEnableToMove) {
             MovementCalculations();

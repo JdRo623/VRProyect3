@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameHandler : MonoBehaviour {
     private float pause;
     public bool isPauseActive;
-    public float time;
+    public float timeToStart;
     public bool isEnableToMove;
     public Text text;
     public GameObject panel;
@@ -14,7 +14,6 @@ public class GameHandler : MonoBehaviour {
     // Use this for initialization
     void Start () {
         pause = 1;
-        time = 10;
         isEnableToMove = false;
     }
 	
@@ -22,14 +21,14 @@ public class GameHandler : MonoBehaviour {
 	void Update () {
         Time.timeScale = pause;
 
-        if (time <= 0)
+        if (timeToStart <= 0)
         {
             isEnableToMove = true;
             text.text = "Buena Suerte!";
         }
         else {
-            time -= Time.deltaTime;
-            text.text = (int)time + "";
+            timeToStart -= Time.deltaTime;
+            text.text = (int)timeToStart + "";
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {

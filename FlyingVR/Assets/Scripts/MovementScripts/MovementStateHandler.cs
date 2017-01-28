@@ -39,7 +39,7 @@ public class MovementStateHandler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-		Debug.Log ("Player Transform: "+this.transform.position);
+		//Debug.Log ("Player Transform: "+this.transform.position);
         Camera.main.transform.position = this.transform.position;
         if (gh.isEnableToMove) {
             MovementCalculations();
@@ -96,7 +96,8 @@ public class MovementStateHandler : MonoBehaviour
         }
     }
     void FreeStyleMovement() {
-        side = this.transform.right * (Camera.main.transform.localRotation.z) * -calculatedSideSpeed;
+		side = new Vector3(0,0,1) * (Camera.main.transform.localRotation.z) * -calculatedSideSpeed;
+		Debug.Log ((Camera.main.transform.localRotation.z) * -calculatedSideSpeed);
     }
     void FreeFallMovement() {
         down = this.transform.up * calculatedSpeedFalling;

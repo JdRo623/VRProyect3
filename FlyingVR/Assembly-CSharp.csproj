@@ -134,6 +134,7 @@
      <Compile Include="Assets\Scripts\MovementScripts\MovementStateHandler.cs" />
      <Compile Include="Assets\Scripts\MovementScripts\SmokeAtributes.cs" />
      <Compile Include="Assets\Scripts\ScoreHandler.cs" />
+     <Compile Include="Assets\Scripts\TextCreatorHandler.cs" />
      <Compile Include="Assets\Utilities\FarlandSkies\Demo\Scripts\Player\FPSWalkerEnhanced.cs" />
      <Compile Include="Assets\Utilities\FarlandSkies\Demo\Scripts\Player\SmoothMouseLook.cs" />
      <Compile Include="Assets\Utilities\FarlandSkies\Demo\Scripts\Skybox\SkyboxChanger.cs" />

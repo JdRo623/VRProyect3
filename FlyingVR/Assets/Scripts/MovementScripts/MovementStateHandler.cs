@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class MovementStateHandler : MonoBehaviour
 {
     public Vector3 movementVector;
@@ -28,13 +29,14 @@ public class MovementStateHandler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         gh = FindObjectOfType<GameHandler>();
         timeCounter = 0;
         initialTime = 0;
         player = GetComponent<Rigidbody>();
         YaxisMovementState += FreeFallMovement;
         XaxisMovementState += FreeStyleMovement;
-        Camera.main.transform.rotation = Camera.main.GetComponentInParent<Transform>().rotation;
+        Camera.main.transform.rotation =Camera.main.GetComponentInParent<Transform>().rotation;
     }
     // Update is called once per frame
     void FixedUpdate()

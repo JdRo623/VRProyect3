@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/LevelD.unity
+- path: Assets/PRUEBASTYLIZED.unity
   isLoaded: 1
   isActive: 1

@@ -10,7 +10,7 @@ public class GameHandler : MonoBehaviour {
     public bool isEnableToMove;
     public Text text;
     public GameObject panel;
-
+	string message = "¡Buena Suerte!";
     // Use this for initialization
     void Start () {
         pause = 1;
@@ -24,11 +24,11 @@ public class GameHandler : MonoBehaviour {
         if (timeToStart <= 0)
         {
             isEnableToMove = true;
-            text.text = "Buena Suerte!";
+            text.text = message;
         }
         else {
             timeToStart -= Time.deltaTime;
-            text.text = (int)timeToStart + "";
+            text.text = ((int)timeToStart).ToString();
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {

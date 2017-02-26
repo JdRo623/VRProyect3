@@ -26,6 +26,10 @@ public class MovementStateHandler : MonoBehaviour
     private float timeCounter;
     private float initialTime;
     private GameHandler gh;
+	string LBoundary="LeftBoundary";
+	string RBoundary = "RigthBoundary";
+	string UBoundary= "UpBoundary";
+	string DBoundary="DownBoundary";
     // Use this for initialization
     void Start()
     {
@@ -41,12 +45,15 @@ public class MovementStateHandler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-		Debug.Log ("Player Transform: "+this.transform.position);
-        Camera.main.transform.position = this.transform.position;
+        
         if (gh.isEnableToMove) {
             MovementCalculations();
         }
     }
+	void Update(){
+	    Vector3 playerPosition = this.transform.position;
+	    Camera.main.transform.position = playerPosition;
+	}
     void MovementCalculations() {
         calculatedSpeedFoward = speedFoward * Time.deltaTime;
         calculatedSpeedFalling = -fallingSpeed * Time.deltaTime;
@@ -59,27 +66,27 @@ public class MovementStateHandler : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.tag == "RigthBoundary") {
+        if (other.gameObject.CompareTag(RBoundary)){
             sideBoundaryDirection = -1;
             sideBoundarySpeed = sideBoundaryImpulse * Time.deltaTime;
             XaxisMovementState -= FreeStyleMovement;
             XaxisMovementState += SideBoundaryImpulse;
         }
-        else if (other.tag == "LeftBoundary") {
+        else if (other.gameObject.CompareTag(LBoundary)) {
             sideBoundarySpeed = sideBoundaryImpulse *Time.deltaTime ;
             sideBoundaryDirection = 1;
             XaxisMovementState -= FreeStyleMovement;
             XaxisMovementState += SideBoundaryImpulse;
         }
-        else if (other.tag == "UpBoundary") {
+        else if (other.gameObject.CompareTag(UBoundary)) {
             SmokeImpulse();
         } else if (other.tag == "Smoke") {
-            smokeImpulse = other.GetComponent<SmokeAtributes>().smokeImpulse;
+            smokeImpulse = other.GetComponent<SmokeAtributes>().smokeImpulse; 
             smokeSpeed = (smokeImpulse+fallingSpeed)*Time.deltaTime;
             YaxisMovementState -= FreeFallMovement;
             YaxisMovementState += SmokeImpulse;
         }
-        else if (other.tag == "DownBoundary")
+        else if (other.gameObject.CompareTag(DBoundary) )
         {
                   ReloadLevel();
         }
@@ -91,8 +98,7 @@ public class MovementStateHandler : MonoBehaviour
         if (smokeSpeed <= (calculatedSpeedFalling - 0.1f) || (timeCounter>1.7)) {
             smokeSpeed = 0;
             calculatedSpeedFalling = 0;
-            timeCounter = 0;
-            Debug.Log("Entro");      
+            timeCounter = 0; 
             YaxisMovementState -= SmokeImpulse;
             YaxisMovementState += FreeFallMovement;
         }
@@ -104,7 +110,6 @@ public class MovementStateHandler : MonoBehaviour
         down = this.transform.up * calculatedSpeedFalling;
     }
     void SideBoundaryImpulse() {
-        Debug.Log("Falling");
         sideBoundarySpeed = Mathf.Lerp(sideBoundarySpeed, 0, Time.deltaTime);
         side = this.transform.right * sideBoundarySpeed * sideBoundaryDirection;
         if (sideBoundarySpeed <= 0.1f) {

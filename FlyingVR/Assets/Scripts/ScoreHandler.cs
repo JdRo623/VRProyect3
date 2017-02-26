@@ -4,10 +4,12 @@ using System.Collections;
 
 public class ScoreHandler : MonoBehaviour {
     public int points;
-    public Text textPoint;
+    public Text textPoint; 
+	private string coin;
 
 	// Use this for initialization
 	void Start () {
+	    coin = "Coin";
         points =0;
 	}
 	
@@ -17,7 +19,7 @@ public class ScoreHandler : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.tag == "Coin") {
+        if (other.gameObject.CompareTag(coin)) {
             points += other.GetComponent<CoinHandler>().point;
             textPoint.text = points+"";
         }

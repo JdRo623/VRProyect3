@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ public class GameHandler : MonoBehaviour {
     void Start () {
         pause = 1;
         isEnableToMove = false;
+        
     }
 	
 	// Update is called once per frame
@@ -34,6 +36,7 @@ public class GameHandler : MonoBehaviour {
         {
             if (pause.Equals(0))
             {
+                GC.Collect();
                 pause = 1;
             }
             else

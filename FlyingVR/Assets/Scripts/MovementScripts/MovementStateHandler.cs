@@ -20,6 +20,7 @@ public class MovementStateHandler : MonoBehaviour
     public float sideBoundaryImpulse;
     private float sideBoundarySpeed;
     private int sideBoundaryDirection;
+    private Vector3 previousPosition;
     delegate void MovementState();
     MovementState YaxisMovementState;
     MovementState XaxisMovementState;
@@ -30,6 +31,7 @@ public class MovementStateHandler : MonoBehaviour
 	string RBoundary = "RigthBoundary";
 	string UBoundary= "UpBoundary";
 	string DBoundary="DownBoundary";
+    string Smoke = "Smoke";
     // Use this for initialization
     void Start()
     {
@@ -52,7 +54,11 @@ public class MovementStateHandler : MonoBehaviour
     }
 	void Update(){
 	    Vector3 playerPosition = this.transform.position;
-	    Camera.main.transform.position = playerPosition;
+        if (previousPosition != playerPosition) {
+            Camera.main.transform.position = playerPosition;
+            previousPosition = playerPosition;
+        }
+	    
 	}
     void MovementCalculations() {
         calculatedSpeedFoward = speedFoward * Time.deltaTime;
@@ -80,7 +86,7 @@ public class MovementStateHandler : MonoBehaviour
         }
         else if (other.gameObject.CompareTag(UBoundary)) {
             SmokeImpulse();
-        } else if (other.tag == "Smoke") {
+        } else if (other.gameObject.CompareTag(Smoke)) {
             smokeImpulse = other.GetComponent<SmokeAtributes>().smokeImpulse; 
             smokeSpeed = (smokeImpulse+fallingSpeed)*Time.deltaTime;
             YaxisMovementState -= FreeFallMovement;

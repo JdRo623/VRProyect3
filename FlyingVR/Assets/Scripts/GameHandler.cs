@@ -18,6 +18,10 @@ public class GameHandler : MonoBehaviour {
         isEnableToMove = false;
         
     }
+    public void EndGame() {
+        Debug.Log("Entro");
+        isEnableToMove = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {

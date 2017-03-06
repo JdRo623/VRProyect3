@@ -32,6 +32,7 @@ public class MovementStateHandler : MonoBehaviour
 	string UBoundary= "UpBoundary";
 	string DBoundary="DownBoundary";
     string Smoke = "Smoke";
+    string EndGame = "EndGame";
     // Use this for initialization
     void Start()
     {
@@ -47,7 +48,6 @@ public class MovementStateHandler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
         if (gh.isEnableToMove) {
             MovementCalculations();
         }
@@ -72,14 +72,14 @@ public class MovementStateHandler : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag(RBoundary)){
+        if (other.gameObject.CompareTag(RBoundary)) {
             sideBoundaryDirection = -1;
             sideBoundarySpeed = sideBoundaryImpulse * Time.deltaTime;
             XaxisMovementState -= FreeStyleMovement;
             XaxisMovementState += SideBoundaryImpulse;
         }
         else if (other.gameObject.CompareTag(LBoundary)) {
-            sideBoundarySpeed = sideBoundaryImpulse *Time.deltaTime ;
+            sideBoundarySpeed = sideBoundaryImpulse * Time.deltaTime;
             sideBoundaryDirection = 1;
             XaxisMovementState -= FreeStyleMovement;
             XaxisMovementState += SideBoundaryImpulse;
@@ -87,14 +87,23 @@ public class MovementStateHandler : MonoBehaviour
         else if (other.gameObject.CompareTag(UBoundary)) {
             SmokeImpulse();
         } else if (other.gameObject.CompareTag(Smoke)) {
-            smokeImpulse = other.GetComponent<SmokeAtributes>().smokeImpulse; 
-            smokeSpeed = (smokeImpulse+fallingSpeed)*Time.deltaTime;
+            smokeImpulse = other.GetComponent<SmokeAtributes>().smokeImpulse;
+            smokeSpeed = (smokeImpulse + fallingSpeed) * Time.deltaTime;
             YaxisMovementState -= FreeFallMovement;
             YaxisMovementState += SmokeImpulse;
         }
-        else if (other.gameObject.CompareTag(DBoundary) )
+        else if (other.gameObject.CompareTag(DBoundary))
         {
-                  ReloadLevel();
+            ReloadLevel();
+        }
+        else if (other.gameObject.CompareTag(EndGame)) {
+            gh.EndGame();
+            YaxisMovementState -= SmokeImpulse;
+            YaxisMovementState -= FreeFallMovement;
+            XaxisMovementState -= FreeStyleMovement;
+            XaxisMovementState -= SideBoundaryImpulse;
+            YaxisMovementState += StayStill;
+            XaxisMovementState += StayStill;
         }
     }
     void SmokeImpulse() {
@@ -108,6 +117,8 @@ public class MovementStateHandler : MonoBehaviour
             YaxisMovementState -= SmokeImpulse;
             YaxisMovementState += FreeFallMovement;
         }
+    }
+    void StayStill() {
     }
     void FreeStyleMovement() {
 		side = new Vector3(0,0,1) * (Camera.main.transform.localRotation.z) * -calculatedSideSpeed;

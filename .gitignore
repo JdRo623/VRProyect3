@@ -250,3 +250,7 @@ sysinfo.txt
 ehthumbs.db
 [Tt]humbs.db
 [Dd]esktop.ini
+FlyingVR/Library
+*.csproj
+*.sln
+*.userprefs

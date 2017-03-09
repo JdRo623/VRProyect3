@@ -26,6 +26,7 @@ public class MovementStateHandler : MonoBehaviour
     MovementState XaxisMovementState;
     private float timeCounter;
     private float initialTime;
+    private bool hasFinished;
     private GameHandler gh;
 	string LBoundary="LeftBoundary";
 	string RBoundary = "RigthBoundary";
@@ -36,7 +37,7 @@ public class MovementStateHandler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        hasFinished = false;
         gh = FindObjectOfType<GameHandler>();
         timeCounter = 0;
         initialTime = 0;
@@ -48,7 +49,7 @@ public class MovementStateHandler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (gh.isEnableToMove) {
+        if (gh.isEnableToMove && !hasFinished) {
             MovementCalculations();
         }
     }
@@ -67,7 +68,6 @@ public class MovementStateHandler : MonoBehaviour
         foward = this.transform.forward * calculatedSpeedFoward;
         YaxisMovementState();
         XaxisMovementState();
-
         player.MovePosition(this.transform.position + (foward + side + down) * calculatedSpeedFoward);
     }
 
@@ -97,13 +97,13 @@ public class MovementStateHandler : MonoBehaviour
             ReloadLevel();
         }
         else if (other.gameObject.CompareTag(EndGame)) {
-            gh.EndGame();
-            YaxisMovementState -= SmokeImpulse;
+            hasFinished = true;
+           /* YaxisMovementState -= SmokeImpulse;
             YaxisMovementState -= FreeFallMovement;
             XaxisMovementState -= FreeStyleMovement;
             XaxisMovementState -= SideBoundaryImpulse;
             YaxisMovementState += StayStill;
-            XaxisMovementState += StayStill;
+            XaxisMovementState += StayStill;*/
         }
     }
     void SmokeImpulse() {

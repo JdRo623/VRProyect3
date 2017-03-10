@@ -157,6 +157,9 @@
     <Compile Include="Assets\NatureStarterKit2\Editor\ImageEffects\SunShaftsEditor.cs" />
     <Compile Include="Assets\NatureStarterKit2\Editor\ImageEffects\TonemappingEditor.cs" />
     <Compile Include="Assets\NatureStarterKit2\Editor\ImageEffects\VignetteAndChromaticAberrationEditor.cs" />
+    <Compile Include="Assets\Nurface\VRMovement\Scripts\Editor\NvrWaypointDataDrawer.cs" />
+    <Compile Include="Assets\Nurface\VRMovement\Scripts\Editor\NvrWaypointEditor.cs" />
+    <Compile Include="Assets\Nurface\VRMovement\Scripts\Editor\NvrWaypointList.cs" />
     <Compile Include="Assets\Time Of Day System Free\Scripts\Editor\TimeOfDayManagerEditor.cs" />
     <Compile Include="Assets\Time Of Day System Free\Utility\Editor\AC_CustomEditor.cs" />
   </ItemGroup>
@@ -266,6 +269,7 @@
     <None Include="Assets\NatureStarterKit2\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
     <None Include="Assets\NatureStarterKit2\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
     <None Include="Assets\NatureStarterKit2\info.txt" />
+    <None Include="Assets\Nurface\DemoAssets\Shaders\UnlitTransparentColor.shader" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />

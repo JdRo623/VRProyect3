@@ -185,6 +185,7 @@
     <Compile Include="Assets\Scripts\MovementScripts\MovementState.cs" />
     <Compile Include="Assets\Scripts\MovementScripts\MovementStateHandler.cs" />
     <Compile Include="Assets\Scripts\MovementScripts\SmokeAtributes.cs" />
+    <Compile Include="Assets\Scripts\MovementScripts\T.cs" />
     <Compile Include="Assets\Scripts\ScoreHandler.cs" />
     <Compile Include="Assets\Scripts\TextCreatorHandler.cs" />
     <Compile Include="Assets\Time Of Day System Free\Examples\Scripts\Example_TOD_Night_Particles.cs" />

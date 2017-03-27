@@ -188,6 +188,7 @@
     <Compile Include="Assets\Scripts\MovementScripts\T.cs" />
     <Compile Include="Assets\Scripts\ScoreHandler.cs" />
     <Compile Include="Assets\Scripts\TextCreatorHandler.cs" />
+    <Compile Include="Assets\Scripts\TutorialHandler.cs" />
     <Compile Include="Assets\Time Of Day System Free\Examples\Scripts\Example_TOD_Night_Particles.cs" />
     <Compile Include="Assets\Time Of Day System Free\Examples\Scripts\Example_UI_Manager.cs" />
     <Compile Include="Assets\Time Of Day System Free\Scripts\DisplayTime.cs" />

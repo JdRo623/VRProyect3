@@ -1,15 +1,3 @@
-#################
-## Eclipse
-#################
-
-*.pydevproject
-.project
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -35,6 +23,7 @@ ExportedObj/
 *.svd
 *.pdb
 
+
 # Unity3D generated meta files
 *.pidb.meta
 
@@ -44,3 +33,11 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Empty folders metas
+Assets/Ferr/Common/Data/cache.txt
+Assets/Ferr/Common/Data/cache.txt.meta
+Assets/Ferr/Common/Data.meta
+Assets/Plugins/Ferr.meta
+Assets/Plugins/Ferr/Common.meta
+Assets/Plugins/Ferr/Common/Data.meta

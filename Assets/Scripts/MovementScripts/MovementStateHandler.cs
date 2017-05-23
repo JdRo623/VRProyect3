@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
-
+using UnityEngine.SceneManagement;
 
 public class MovementStateHandler : MonoBehaviour
 {
@@ -37,6 +36,9 @@ public class MovementStateHandler : MonoBehaviour
     public float walkingTime; 
     private float countWalkingTime;
     private Vector3 neutralVector;
+    public Transform contentMover;
+    public Transform freeStyleChildCameraPoint;
+
     // Use this for initializ
     
     void Start()
@@ -49,7 +51,8 @@ public class MovementStateHandler : MonoBehaviour
         player = GetComponent<Rigidbody>();
         YaxisMovementState += FreeFallMovement;
         XaxisMovementState += FreeStyleMovement;
-        Camera.main.transform.rotation =Camera.main.GetComponentInParent<Transform>().rotation;
+        
+        contentMover.rotation = contentMover.parent.rotation;
         countWalkingTime = 0;
     }
     // Update is called once per frame
@@ -62,7 +65,7 @@ public class MovementStateHandler : MonoBehaviour
 	void Update(){
 	    Vector3 playerPosition = this.transform.position;
         if (previousPosition != playerPosition) {
-            Camera.main.transform.position = playerPosition;
+            contentMover.position = playerPosition;
             previousPosition = playerPosition;
         }
 	    
@@ -134,7 +137,7 @@ public class MovementStateHandler : MonoBehaviour
     }
     void FreeStyleMovement() {
         calculatedSpeedFoward = speedFoward * Time.deltaTime;
-        side = new Vector3(0,0,1) * (Camera.main.transform.localRotation.z) * -calculatedSideSpeed;
+        side = new Vector3(0,0,1) * (freeStyleChildCameraPoint.parent.localRotation.z) * -calculatedSideSpeed;
     }
     void FreeFallMovement() {
         down = this.transform.up * calculatedSpeedFalling;
@@ -147,7 +150,8 @@ public class MovementStateHandler : MonoBehaviour
             XaxisMovementState += FreeStyleMovement;
         }
     }
-    void ReloadLevel() {
-        Application.LoadLevel(Application.loadedLevelName);
+    void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -28,7 +28,7 @@ public class MovementStateHandler : MonoBehaviour
     private bool hasFinished;
     private GameHandler gh;
 	string LBoundary="LeftBoundary";
-	string RBoundary = "RigthBoundary";
+	string RBoundary = "RightBoundary";
 	string UBoundary= "UpBoundary";
 	string DBoundary="DownBoundary";
     string Smoke = "Smoke";
@@ -58,20 +58,22 @@ public class MovementStateHandler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (gh.isEnableToMove && !hasFinished) {
+        if (gh.isEnableToMove && !hasFinished) 
             MovementCalculations();
-        }
     }
-	void Update(){
+
+	void Update()
+    {
 	    Vector3 playerPosition = this.transform.position;
-        if (previousPosition != playerPosition) {
+        if (previousPosition != playerPosition)
+        {
             contentMover.position = playerPosition;
             previousPosition = playerPosition;
         }
 	    
 	}
-    void MovementCalculations() {
-        
+    void MovementCalculations()
+    {    
         calculatedSpeedFalling = -fallingSpeed * Time.deltaTime;
         calculatedSideSpeed = sideSpeed * Time.deltaTime;
         YaxisMovementState();
@@ -80,32 +82,35 @@ public class MovementStateHandler : MonoBehaviour
         player.MovePosition(this.transform.position + (foward + side + down) * calculatedSpeedFoward);
     }
 
-    void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag(RBoundary)) {
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(RBoundary))
+        {
             sideBoundaryDirection = -1;
             sideBoundarySpeed = sideBoundaryImpulse * Time.deltaTime;
             XaxisMovementState -= FreeStyleMovement;
             XaxisMovementState += SideBoundaryImpulse;
         }
-        else if (other.gameObject.CompareTag(LBoundary)) {
+        else if (other.gameObject.CompareTag(LBoundary))
+        {
             sideBoundarySpeed = sideBoundaryImpulse * Time.deltaTime;
             sideBoundaryDirection = 1;
             XaxisMovementState -= FreeStyleMovement;
             XaxisMovementState += SideBoundaryImpulse;
         }
-        else if (other.gameObject.CompareTag(UBoundary)) {
+        else if (other.gameObject.CompareTag(UBoundary)) 
             SmokeImpulse();
-        } else if (other.gameObject.CompareTag(Smoke)) {
+        else if (other.gameObject.CompareTag(Smoke))
+        {
             smokeImpulse = other.GetComponent<SmokeAtributes>().smokeImpulse;
             smokeSpeed = (smokeImpulse + fallingSpeed) * Time.deltaTime;
             YaxisMovementState -= FreeFallMovement;
             YaxisMovementState += SmokeImpulse;
         }
         else if (other.gameObject.CompareTag(DBoundary))
-        {
             ReloadLevel();
-        }
-        else if (other.gameObject.CompareTag(EndGame)) {
+        else if (other.gameObject.CompareTag(EndGame))
+        {
             Debug.Log("EndGame");
             //hasFinished = true;
             YaxisMovementState -= FreeFallMovement;
@@ -114,11 +119,14 @@ public class MovementStateHandler : MonoBehaviour
             XaxisMovementState += StayStillX;
         }
     }
-    void SmokeImpulse() {
+
+    void SmokeImpulse()
+    {
         timeCounter += Time.deltaTime;
         smokeSpeed = Mathf.Lerp(smokeSpeed, calculatedSpeedFalling, Time.deltaTime);
         down = this.transform.up * smokeSpeed;
-        if (smokeSpeed <= (calculatedSpeedFalling - 0.1f) || (timeCounter>1.7)) {
+        if (smokeSpeed <= (calculatedSpeedFalling - 0.1f) || (timeCounter>1.7))
+        {
             smokeSpeed = 0;
             calculatedSpeedFalling = 0;
             timeCounter = 0; 
@@ -126,30 +134,41 @@ public class MovementStateHandler : MonoBehaviour
             YaxisMovementState += FreeFallMovement;
         }
     }
-    void StayStill() {
-        if (down != neutralVector) {
+
+    void StayStill()
+    {
+        if (down != neutralVector) 
             down = neutralVector;
-        }
     }
-    void StayStillX() {
- 
+
+    void StayStillX()
+    {
         calculatedSpeedFoward = Mathf.Lerp(calculatedSpeedFoward, 0, Time.deltaTime);
     }
-    void FreeStyleMovement() {
+
+    void FreeStyleMovement()
+    {
         calculatedSpeedFoward = speedFoward * Time.deltaTime;
         side = new Vector3(0,0,1) * (freeStyleChildCameraPoint.parent.localRotation.z) * -calculatedSideSpeed;
     }
-    void FreeFallMovement() {
+
+    void FreeFallMovement()
+    {
         down = this.transform.up * calculatedSpeedFalling;
     }
-    void SideBoundaryImpulse() {
+
+    void SideBoundaryImpulse()
+    {
         sideBoundarySpeed = Mathf.Lerp(sideBoundarySpeed, 0, Time.deltaTime);
-        side = this.transform.right * sideBoundarySpeed * sideBoundaryDirection;
-        if (sideBoundarySpeed <= 0.1f) {
+        side = transform.right * sideBoundarySpeed * sideBoundaryDirection;
+        
+        if (sideBoundarySpeed <= 0.08f)
+        {
             XaxisMovementState -= SideBoundaryImpulse;
             XaxisMovementState += FreeStyleMovement;
         }
     }
+
     void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

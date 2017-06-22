@@ -31,14 +31,14 @@ public class GvrFPS : MonoBehaviour {
   }
 
   void Start() {
-    if (cam == null) {
-       cam = Camera.main;
-    }
+    //if (cam == null) {
+    //   cam = Camera.main;
+    //}
 
-    if (cam != null) {
-      // Tie this to the camera, and do not keep the local orientation.
-      transform.SetParent(cam.GetComponent<Transform>(), true);
-    }
+    //if (cam != null) {
+    //  // Tie this to the camera, and do not keep the local orientation.
+    //  transform.SetParent(cam.GetComponent<Transform>(), true);
+    //}
   }
 
   void LateUpdate() {

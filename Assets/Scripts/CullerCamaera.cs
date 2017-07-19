@@ -2,11 +2,14 @@
 
 public class CullerCamaera : MonoBehaviour
 {
-    void Start()
+    [SerializeField]
+    private float maxDistance = 150;
+
+    private void Start()
     {
         Camera camera = GetComponent<Camera>();
         float[] distances = new float[32];
-        distances[8] = 150;
+        distances[8] = maxDistance;
         camera.layerCullDistances = distances;
     }
 }

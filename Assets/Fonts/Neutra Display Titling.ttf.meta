@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 6bb071eabbb444057b9164d0a025f4b1
+timeCreated: 1502926374
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Neutra Display
+  fontNames:
+  - Neutra Display
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

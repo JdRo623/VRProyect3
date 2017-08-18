@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class MovementStateHandler : MonoBehaviour
 {
+    public UnityEvent EndedDelegate;
+
     public Vector3 movementVector;
     public float speedFoward;
     private float calculatedSpeedFoward;
@@ -98,7 +101,7 @@ public class MovementStateHandler : MonoBehaviour
             XaxisMovementState -= FreeStyleMovement;
             XaxisMovementState += SideBoundaryImpulse;
         }
-        else if (other.gameObject.CompareTag(UBoundary)) 
+        else if (other.gameObject.CompareTag(UBoundary))
             SmokeImpulse();
         else if (other.gameObject.CompareTag(Smoke))
         {
@@ -111,8 +114,8 @@ public class MovementStateHandler : MonoBehaviour
             ReloadLevel();
         else if (other.gameObject.CompareTag(EndGame))
         {
-            Debug.Log("EndGame");
-            //hasFinished = true;
+            EndedDelegate.Invoke();
+            hasFinished = true;
             YaxisMovementState -= FreeFallMovement;
             YaxisMovementState += StayStill;
             XaxisMovementState -= FreeStyleMovement;

@@ -15,7 +15,7 @@ public class GameObjectTimeDeactivator : MonoBehaviour
 
     public void Activate()
     {
-        gameObject.SetActive(true);
+        content.SetActive(true);
         StartCoroutine(StartTimer());
     }
 

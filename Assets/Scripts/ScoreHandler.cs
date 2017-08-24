@@ -5,6 +5,7 @@ using System.Collections;
 public class ScoreHandler : MonoBehaviour {
     public int points;
     public Text textPoint; 
+	public AudioSource coinSound;
 	private string coin;
 
 	// Use this for initialization
@@ -22,6 +23,7 @@ public class ScoreHandler : MonoBehaviour {
         if (other.gameObject.CompareTag(coin)) {
             points += other.GetComponent<CoinHandler>().point;
             textPoint.text = points+"";
+			coinSound.Play ();
         }
     }
 }

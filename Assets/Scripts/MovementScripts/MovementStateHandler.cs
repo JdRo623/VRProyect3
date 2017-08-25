@@ -105,7 +105,9 @@ public class MovementStateHandler : MonoBehaviour
             SmokeImpulse();
         else if (other.gameObject.CompareTag(Smoke))
         {
-            smokeImpulse = other.GetComponent<SmokeAtributes>().smokeImpulse;
+            SmokeAtributes atributes = other.GetComponent<SmokeAtributes>();
+            smokeImpulse = atributes.smokeImpulse;
+            atributes.smokeAudio.Play();
             smokeSpeed = (smokeImpulse + fallingSpeed) * Time.deltaTime;
             YaxisMovementState -= FreeFallMovement;
             YaxisMovementState += SmokeImpulse;
